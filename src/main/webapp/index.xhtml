@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" >
+
     <h:head>
         <title>Multitasking</title>
     </h:head>
@@ -9,9 +11,53 @@
         <h1>Berechnungen mit Threads in Java EE 7</h1>
         <br/>
         <h:panelGrid columns="2">
-            <h:commandButton action="#{indexBean.addThread()}" value="Start Thread" />
-            <h:commandButton action="#{indexBean.someAction()}" value="tbd" />
+            <h:form>
+                <h:commandButton action="#{indexBean.addThread}" value="Start Thread" />
+                <h:commandButton action="#{indexBean.someAction}" value="tbd" />
+            </h:form>
         </h:panelGrid>
+        <h:dataTable border="1" 
+                     value="#{indexBean.threadList}" 
+                     var="__tableItem" 
+                     rendered="#{indexBean.showThreadList}">
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Thread ID"/>
+                </f:facet>
+                <h:outputText value="#{__tableItem.threadId}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Thread Task"/>
+                </f:facet>
+                <h:outputText value="#{__tableItem.task}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Start Time"/>
+                </f:facet>
+                <h:outputText value="#{__tableItem.startTime}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="End Time"/>
+                </f:facet>
+                <h:outputText value="#{__tableItem.endTime}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Thread Status"/>
+                </f:facet>
+                <h:outputText value="#{__tableItem.status}"/>
+            </h:column>
+
+        </h:dataTable>
+
     </h:body>
 </html>
 
