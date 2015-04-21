@@ -9,7 +9,7 @@ package org.doblander.multitasking.beans;
  *
  * @author intruder
  */
-class ThreadInfo {
+class ThreadInfoItem {
     
     String threadId;
     String task;

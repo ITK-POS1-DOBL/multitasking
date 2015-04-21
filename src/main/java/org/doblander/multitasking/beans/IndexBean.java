@@ -21,7 +21,7 @@ public class IndexBean {
 
     private boolean showThreadList = true;
 
-    private List<ThreadInfo> threadList = new ArrayList<>();
+    private List<ThreadInfoItem> threadList = new ArrayList<>();
 
     /**
      * Creates a new instance of IndexBean
@@ -34,7 +34,7 @@ public class IndexBean {
      *
      * @return the value of threadList
      */
-    public List<ThreadInfo> getThreadList() {
+    public List<ThreadInfoItem> getThreadList() {
         return threadList;
     }
 
@@ -43,7 +43,7 @@ public class IndexBean {
      *
      * @param threadList new value of threadList
      */
-    public void setThreadList(List<ThreadInfo> threadList) {
+    public void setThreadList(List<ThreadInfoItem> threadList) {
         this.threadList = threadList;
     }
 
