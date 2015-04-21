@@ -8,8 +8,10 @@ package org.doblander.multitasking.beans;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import org.doblander.multitasking.service.TaskManager;
 
 /**
  * Managed Bean for JSF page index.xhtml.
@@ -22,13 +24,24 @@ public class IndexBean {
 
     private boolean showThreadList = true;
     private List<ThreadInfoItem> threadList = new ArrayList<>();
-    private List<String> taskList = new ArrayList<>(Arrays.asList("low complexity", "medium complexity", "high complexity"));
+    private List<String> taskList
+            = new ArrayList<>(Arrays.asList("low complexity",
+                            "medium complexity", "high complexity"));
     private String taskListItem;
+
+    @EJB
+    private TaskManager taskMgr;
 
     /**
      * Creates a new instance of IndexBean
      */
     public IndexBean() {
+        
+    }
+
+    public void startTask() {
+
+        taskMgr.createThreadWithTask(getTaskListItem());
     }
 
     /**
@@ -47,10 +60,6 @@ public class IndexBean {
      */
     public void setTaskListItem(String taskListItem) {
         this.taskListItem = taskListItem;
-    }
-
-    public void startTask() {
-
     }
 
     /**
