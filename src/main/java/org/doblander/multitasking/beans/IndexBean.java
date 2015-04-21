@@ -6,6 +6,7 @@
 package org.doblander.multitasking.beans;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -20,13 +21,54 @@ import javax.enterprise.context.RequestScoped;
 public class IndexBean {
 
     private boolean showThreadList = true;
-
     private List<ThreadInfoItem> threadList = new ArrayList<>();
+    private List<String> taskList = new ArrayList<>(Arrays.asList("low complexity", "medium complexity", "high complexity"));
+    private String taskListItem;
 
     /**
      * Creates a new instance of IndexBean
      */
     public IndexBean() {
+    }
+
+    /**
+     * Get the value of taskListItem
+     *
+     * @return the value of taskListItem
+     */
+    public String getTaskListItem() {
+        return taskListItem;
+    }
+
+    /**
+     * Set the value of taskListItem
+     *
+     * @param taskListItem new value of taskListItem
+     */
+    public void setTaskListItem(String taskListItem) {
+        this.taskListItem = taskListItem;
+    }
+
+    public void startTask() {
+
+    }
+
+    /**
+     * Get the value of taskList
+     *
+     * @return the value of taskList
+     */
+    public List<String> getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * Set the value of taskList
+     *
+     * @param taskList new value of taskList
+     */
+    public void setTaskList(List<String> taskList) {
+        this.taskList = taskList;
     }
 
     /**

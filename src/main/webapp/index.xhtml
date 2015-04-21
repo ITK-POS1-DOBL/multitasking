@@ -10,12 +10,17 @@
     <h:body>
         <h1>Berechnungen mit Threads in Java EE 7</h1>
         <br/>
-        <h:panelGrid columns="2">
-            <h:form>
-                <h:commandButton action="#{indexBean.addThread}" value="Start Thread" />
-                <h:commandButton action="#{indexBean.someAction}" value="tbd" />
-            </h:form>
-        </h:panelGrid>
+
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Task" />
+                <h:selectOneListbox size="1" value="#{indexBean.taskListItem}" >
+                    <f:selectItems value="#{indexBean.taskList}" var="__listItem" itemLabel="#{__listItem}" />
+                </h:selectOneListbox>
+                <h:commandButton action="#{indexBean.startTask}" value="Start Task" />
+            </h:panelGrid>
+        </h:form>
+
         <h:dataTable border="1" 
                      value="#{indexBean.threadList}" 
                      var="__tableItem" 
