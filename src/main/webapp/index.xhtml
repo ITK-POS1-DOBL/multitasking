@@ -14,8 +14,8 @@
         <h:form>
             <h:panelGrid columns="2">
                 <h:outputLabel value="Task" />
-                <h:selectOneListbox size="1" value="#{indexBean.taskListItem}" >
-                    <f:selectItems value="#{indexBean.taskList}" var="__listItem" itemLabel="#{__listItem}" />
+                <h:selectOneListbox size="1" value="#{indexBean.taskTypeListItem}" >
+                    <f:selectItems value="#{indexBean.taskTypeList}" var="__listItem" itemLabel="#{__listItem}" />
                 </h:selectOneListbox>
                 <h:commandButton action="#{indexBean.startTask}" value="Start Task" />
             </h:panelGrid>
