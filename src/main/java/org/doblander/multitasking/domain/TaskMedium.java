@@ -18,7 +18,7 @@ public class TaskMedium extends Task {
 
         while (tooEarlyToQuit) {
             i = i + 1;
-            if (i > 20000000000000.0) {
+            if (i > 10000000000.0) {
                 tooEarlyToQuit = false;
             }
         }

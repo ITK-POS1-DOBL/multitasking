@@ -5,7 +5,6 @@
  */
 package org.doblander.multitasking.domain;
 
-import java.util.Date;
 import java.util.concurrent.Future;
 
 /**
@@ -13,6 +12,7 @@ import java.util.concurrent.Future;
  * @author intruder
  */
 public class TaskInfo {
+
     private int Id;
     private String taskCategory;
     private long startTime;
@@ -67,6 +67,5 @@ public class TaskInfo {
     public void setFuture(Future future) {
         this.future = future;
     }
-    
-    
+
 }

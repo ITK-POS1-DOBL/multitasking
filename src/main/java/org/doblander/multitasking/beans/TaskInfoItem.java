@@ -5,24 +5,46 @@
  */
 package org.doblander.multitasking.beans;
 
+import org.doblander.multitasking.domain.TaskInfo;
+
 /**
  *
  * @author intruder
  */
-class ThreadInfoItem {
-    
-    private String threadId;
+public class TaskInfoItem {
+
+    private String taskId;
     private String task;
     private String startTime;
     private String endTime;
     private String status;
 
-    public String getThreadId() {
-        return threadId;
+    public TaskInfoItem() {
+
     }
 
-    public void setThreadId(String threadId) {
-        this.threadId = threadId;
+    public TaskInfoItem(String threadId, String task, String startTime, String endTime, String status) {
+        this.taskId = threadId;
+        this.task = task;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
+    }
+
+    public TaskInfoItem(TaskInfo taskInfo) {
+        this.taskId = String.valueOf(taskInfo.getId());
+        this.task = taskInfo.getTaskCategory();
+        this.startTime = String.valueOf(taskInfo.getStartTime());
+        this.endTime = String.valueOf(taskInfo.getEndTime());
+        this.status = taskInfo.getStatus();
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 
     public String getTask() {
@@ -56,6 +78,5 @@ class ThreadInfoItem {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
 }

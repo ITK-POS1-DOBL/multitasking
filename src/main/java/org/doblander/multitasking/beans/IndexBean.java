@@ -6,11 +6,12 @@
 package org.doblander.multitasking.beans;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import org.doblander.multitasking.domain.TaskInfo;
 import org.doblander.multitasking.service.TaskManager;
 
 /**
@@ -23,10 +24,8 @@ import org.doblander.multitasking.service.TaskManager;
 public class IndexBean {
 
     private boolean showThreadList = true;
-    private List<ThreadInfoItem> threadList = new ArrayList<>();
-    private List<String> taskTypeList
-            = new ArrayList<>(Arrays.asList("low complexity",
-                            "medium complexity", "high complexity"));
+    private List<TaskInfoItem> threadList = new ArrayList<>();
+    private List<String> taskTypeList;
     private String taskTypeListItem;
 
     @EJB
@@ -36,13 +35,14 @@ public class IndexBean {
      * Creates a new instance of IndexBean
      */
     public IndexBean() {
-        
+
     }
 
     public void startTask() {
 
-        taskMgr.createThreadWithTask(getTaskTypeListItem());
-        setThreadList(taskMgr.getTaskList());
+        taskMgr.createAndStartThreadWithTask(getTaskTypeListItem());
+        setThreadList(convertTaskInfoListToStringRepresentationList(
+                taskMgr.getTaskList()));
     }
 
     /**
@@ -69,7 +69,7 @@ public class IndexBean {
      * @return the value of taskTypeList
      */
     public List<String> getTaskTypeList() {
-        return taskTypeList;
+        return taskMgr.getTaskTypes();
     }
 
     /**
@@ -78,7 +78,7 @@ public class IndexBean {
      * @param taskList new value of taskTypeList
      */
     public void setTaskTypeList(List<String> taskList) {
-        this.taskTypeList = taskList;
+        this.taskTypeList = taskMgr.getTaskTypes();
     }
 
     /**
@@ -86,7 +86,7 @@ public class IndexBean {
      *
      * @return the value of threadList
      */
-    public List<ThreadInfoItem> getThreadList() {
+    public List<TaskInfoItem> getThreadList() {
         return threadList;
     }
 
@@ -95,7 +95,7 @@ public class IndexBean {
      *
      * @param threadList new value of threadList
      */
-    public void setThreadList(List<ThreadInfoItem> threadList) {
+    public void setThreadList(List<TaskInfoItem> threadList) {
         this.threadList = threadList;
     }
 
@@ -117,4 +117,37 @@ public class IndexBean {
         this.showThreadList = showThreadList;
     }
 
+    /**
+     * Refresh the task list with current values.
+     */
+    public void refreshThreads() {
+
+        setThreadList(convertTaskInfoListToStringRepresentationList(
+                taskMgr.getTaskList()));
+
+    }
+
+    private List<TaskInfoItem> convertTaskInfoListToStringRepresentationList(
+            List<TaskInfo> taskInfoList) {
+        List<TaskInfoItem> taskInfoItemList = new ArrayList<>();
+        Iterator<TaskInfo> iterator = taskInfoList.iterator();
+        while (iterator.hasNext()) {
+            taskInfoItemList.add(convertTaskInfoToTaskInfoList(
+                    iterator.next()));
+        }
+
+        return taskInfoItemList;
+    }
+
+    private TaskInfoItem convertTaskInfoToTaskInfoList(TaskInfo taskInfo) {
+        TaskInfoItem taskInfoItem = new TaskInfoItem(
+                String.valueOf(taskInfo.getId()),
+                taskInfo.getTaskCategory(),
+                String.valueOf(taskInfo.getStartTime()),
+                String.valueOf(taskInfo.getEndTime()),
+                taskInfo.getStatus());
+        ;
+
+        return taskInfoItem;
+    }
 }

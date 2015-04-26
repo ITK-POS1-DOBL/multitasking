@@ -18,7 +18,7 @@ public class TaskHigh extends Task {
 
         while (tooEarlyToQuit) {
             i = i + 1.0;
-            if (i > 200000000000000000.0) {
+            if (i > 20000000000.0) {
                 tooEarlyToQuit = false;
             }
         }

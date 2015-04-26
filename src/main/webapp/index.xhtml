@@ -18,6 +18,7 @@
                     <f:selectItems value="#{indexBean.taskTypeList}" var="__listItem" itemLabel="#{__listItem}" />
                 </h:selectOneListbox>
                 <h:commandButton action="#{indexBean.startTask}" value="Start Task" />
+                <h:commandButton action="#{indexBean.refreshThreads}" value="Refresh" />
             </h:panelGrid>
         </h:form>
 
@@ -30,7 +31,7 @@
                 <f:facet name="header">
                     <h:outputText value="Thread ID"/>
                 </f:facet>
-                <h:outputText value="#{__tableItem.threadId}"/>
+                <h:outputText value="#{__tableItem.taskId}"/>
             </h:column>
 
             <h:column>
