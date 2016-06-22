@@ -24,6 +24,7 @@
     </dependencies>
 
     <build>
+    	<finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -32,6 +33,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <executable>${JAVA_HOME}/javac</executable>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -73,7 +75,7 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.0.2.Final</version>
+                <version>1.0.1.Final</version>
             </plugin>
             
         </plugins>
