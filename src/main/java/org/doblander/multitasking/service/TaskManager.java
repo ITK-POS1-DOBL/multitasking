@@ -16,6 +16,8 @@ import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.inject.Inject;
+
+import org.doblander.multitasking.domain.Task;
 import org.doblander.multitasking.domain.TaskHigh;
 import org.doblander.multitasking.domain.TaskInfo;
 import org.doblander.multitasking.domain.repository.TaskInfoRepository;
@@ -49,7 +51,7 @@ public class TaskManager {
      */
     public void createAndStartThreadWithTask(String taskCategory) {
 
-        Future future = executor.submit(createTaskByType(taskCategory));
+        Future<Task> future = executor.submit(createTaskByType(taskCategory));
         taskInfoRepo.addTaskInfo(taskCategory, new Date().getTime(), 0,
                 "running", future);
 
@@ -61,28 +63,22 @@ public class TaskManager {
      * @param taskType
      * @return A Callable that can directly be used with Executor
      */
-    public Callable createTaskByType(String taskType) {
-        Callable myCallable;
+    public Callable<Task> createTaskByType(String taskType) {
 
         switch (taskType) {
             case "low complexity":
-                myCallable = new TaskLow();
-                break;
+            	return new TaskLow();
             case "medium complexity":
-                myCallable = new TaskMedium();
-                break;
+                return new TaskMedium();
             case "high complexity":
-                myCallable = new TaskHigh();
-                break;
+                return new TaskHigh();
             default:
-                myCallable = null;
-                break;
+                return null;
         }
 
-        return myCallable;
     }
 
-    public List getTaskList() {
+    public List<TaskInfo> getTaskList() {
         List<TaskInfo> tInfList = taskInfoRepo.getTaskInfoList();
         Iterator<TaskInfo> iterator = tInfList.iterator();
         while (iterator.hasNext()) {

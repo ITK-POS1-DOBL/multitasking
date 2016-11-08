@@ -12,6 +12,7 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
     </properties>
     
     <dependencies>
@@ -33,7 +34,6 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <executable>${JAVA_HOME}/javac</executable>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -75,7 +75,7 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.0.1.Final</version>
+                <version>1.1.0.Alpha9</version>
             </plugin>
             
         </plugins>
